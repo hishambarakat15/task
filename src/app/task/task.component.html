@@ -1,0 +1,49 @@
+<div class="card">
+    <div class="container mt-5">
+        <!-- Add New Task -->
+        <form [formGroup]="taskFormGroup">
+            <div class="mb-3 row">
+                <label for="task" class="col-sm-2 col-form-label">New Task</label>
+                <div class="col-sm-8">
+                    <input type="text" placeholder="Add New Task" class="form-control" id="task"
+                        formControlName="taskTitle">
+                </div>
+                <div>
+                    <button class="btn btn-secondary" (click)="onAddNewTask()"> Next </button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Show All Tasks-->
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Task Title</th>
+                        <th scope="col">Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let task of tasks ; index as i">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{task.taskTitle}}</td>
+                        <td>
+                            <button class="btn btn-outline-danger" (click)="onDeleteClick(i)"> Delete</button>
+
+                        </td>
+                    </tr>
+                    <tr *ngIf="tasks.length < 1">
+                        <td colspan="3">
+                            <div class="alert alert-warning" role="alert">
+                                No Tasks Found
+                            </div>
+                        </td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
