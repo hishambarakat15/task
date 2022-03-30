@@ -8,10 +8,11 @@
                     <input type="text" placeholder="Add New Task" class="form-control" id="task"
                         formControlName="taskTitle">
                 </div>
-                <div>
-                    <button class="btn btn-secondary" (click)="onAddNewTask()"> Next </button>
-                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-secondary"  [disabled]="taskFormGroup.invalid" (click)="onAddNewTask()"> Next </button>
+                </div> 
             </div>
+
         </form>
 
         <!-- Show All Tasks-->

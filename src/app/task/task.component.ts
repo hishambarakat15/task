@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TaskService } from './../services/task.service';
 
 @Component({
   selector: 'app-task',
@@ -9,26 +10,25 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class TaskComponent implements OnInit {
   taskFormGroup!: FormGroup;
   tasks: any[] = [];
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private _taskService: TaskService) { }
 
   ngOnInit(): void {
+    this.tasks = this._taskService.taskes;
     this._initTaskForm();
 
   }
 
   /* Add New Task */
+
   onAddNewTask() {
-    const newTask = {
-      taskTitle: this.taskFormGroup.controls.taskTitle.value
-    }
-    this.tasks.push(newTask);
-    console.log(this.tasks);
+    const taskTitle = this.taskFormGroup.controls.taskTitle.value;
+    this._taskService.saveTask(taskTitle);
 
   }
 
   /* Delete Task */
   onDeleteClick(index: any) {
-    this.tasks.splice(index, 1)
+    this._taskService.deleteTask(index)
 
   }
 
